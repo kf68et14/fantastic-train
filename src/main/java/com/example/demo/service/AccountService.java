@@ -15,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
@@ -22,13 +26,14 @@ import org.springframework.util.StringUtils;
 import javax.security.auth.login.AccountNotFoundException;
 import javax.transaction.Transactional;
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class AccountService implements IAccountService {
+public class AccountService implements IAccountService, UserDetailsService {
 
     @Autowired
     private ModelMapper modelMapper;
@@ -159,16 +164,24 @@ public class AccountService implements IAccountService {
         return account.isPresent();
     }
 
+    @Override
+    public Account getAccountByUsername(String username) throws AccountNotFoundException {
+        Account account = repository.findByUsername(username);
+        return account;
+    }
 
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		Account account = repository.findByUsername(username);
-//		if (account == null){
-//			throw new UsernameNotFoundException("can not found this account");
-//		}
-//			return new Account(account.getUsername(), account.getPassword(),
-//					AuthorityUtils.createAuthorityList("USER"));
-//		}
-//	}
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = repository.findByUsername(username);
+        if(account != null){
+            return new User(account.getUsername(), account.getPassword(), Collections.emptyList());
+        } else {
+            try {
+                throw new AccountNotFoundException("Account username not exits");
+            } catch (AccountNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
 

@@ -1,10 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-
 import com.example.demo.converter.RoleConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.annotations.Formula;
+
 
 import javax.persistence.*;
 
@@ -24,7 +20,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class Account implements Serializable, UserDetails {
+public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,14 +32,14 @@ public class Account implements Serializable, UserDetails {
     @Column(name = "UserName", length = 50, nullable = false, unique = false)
     private String username;
 
-    @Column(name = "Email", length = 50, nullable = false)
-    private String email;
-
     @Column(name = "FirstName", length = 50, nullable = false)
     private String firstName;
 
     @Column(name = "LastName", length = 50, nullable = false)
     private String lastName;
+
+    @Formula(" concat(LastName, ' ', FirstName)")
+    private String fullName;
 
     @Column(name = "Password")
     private String password;
@@ -61,39 +57,6 @@ public class Account implements Serializable, UserDetails {
     @CreationTimestamp
     private Date createdDate;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
 

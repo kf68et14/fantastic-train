@@ -29,4 +29,6 @@ public interface IAccountService {
     void deleteById(int id) throws AccountNotFoundException;
 
     boolean isAccountExitById(int id);
+
+    Account getAccountByUsername(String username) throws AccountNotFoundException;
 }
