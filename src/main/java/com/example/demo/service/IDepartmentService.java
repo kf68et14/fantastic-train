@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.DepartmentResponseDTO;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Department;
 import com.example.demo.form.DepartmentFilterForm;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IDepartmentService {
 
-    public Department getDepartmentByID(int id);
+    public DepartmentResponseDTO getDepartmentByID(int id) throws Exception;
 
     Page<Department> getAllDepartments(String search, Pageable pageable, DepartmentFilterForm filterForm);
 

@@ -28,10 +28,13 @@ public class WebSecurityConfiguration extends WebMvcConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .antMatchers().permitAll()
+                .antMatchers("api/v1/accounts/**").permitAll()
+                .antMatchers("api/v1.departments/**").hasAnyAuthority("ADMIN","MANAGER")
                 .anyRequest().authenticated()
                 .and().httpBasic()
-                .and().cors().and().csrf().disable();
+                .and()
+               // .cors().and()
+                .csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

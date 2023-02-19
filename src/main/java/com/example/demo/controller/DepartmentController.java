@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.demo.dto.AccountResponseDTO;
 import com.example.demo.dto.DepartmentResponseDTO;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Department;
@@ -10,9 +11,7 @@ import com.example.demo.form.DepartmentFilterForm;
 import com.example.demo.form.DepartmentRequestFormForCreate;
 import com.example.demo.form.DepartmentRequestFormForUpdate;
 import com.example.demo.service.IDepartmentService;
-
 import org.modelmapper.ModelMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,21 +36,19 @@ public class DepartmentController {
             Pageable pageable,
             DepartmentFilterForm filterForm) {
         Page<Department> departments = service.getAllDepartments(search, pageable, filterForm);
-        List<DepartmentResponseDTO> dtos = departments
-                .stream()
-                .map(department -> modelMapper.map(department, DepartmentResponseDTO.class))
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        Page<DepartmentResponseDTO> result = departments.map(department -> modelMapper.map(department, DepartmentResponseDTO.class));
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getDepartmentById(@RequestParam int id) {
-        Department department = service.getDepartmentByID(id);
-        return new ResponseEntity<String>("get successfull", HttpStatus.OK);
+    public ResponseEntity<?> getDepartmentById(@PathVariable(name = "id") int id) throws Exception {
+        DepartmentResponseDTO department = service.getDepartmentByID(id);
+        return new ResponseEntity<DepartmentResponseDTO>(department, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> createDepartment(@RequestBody @Valid DepartmentRequestFormForCreate form) {
+    public ResponseEntity<?> createDepartment(
+            @RequestBody @Valid DepartmentRequestFormForCreate form) {
         service.createDepartment(form);
         return new ResponseEntity<String>("Create successfully", HttpStatus.CREATED);
     }

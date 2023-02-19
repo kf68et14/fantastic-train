@@ -1,13 +1,16 @@
 package com.example.demo.entity;
 
 import com.example.demo.converter.DepartmentTypeConvert;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,18 +27,24 @@ public class Department implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "DepartmentName", length = 50, unique = true)
+    @Column(name = "DepartmentName", length = 50)
     @NonNull
     private String name;
 
     @Column(name = "TotalMember")
     private int totalMember;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Column(name = "CreateDate")
+    private Date createdDate;
+
     @Column(name = "Type", nullable = false)
     @Convert(converter = DepartmentTypeConvert.class)
     private Type type;
 
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)//
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<Account> accounts;
 
     public Department(String name, Type type) {

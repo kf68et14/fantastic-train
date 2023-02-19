@@ -30,7 +30,9 @@ public class AccountController {
     private IAccountService service;
 
     @GetMapping
-    public ResponseEntity<?> getAllAccounts(@RequestParam(value = "search", required = false) String search, Pageable pageable, @RequestParam(value = "role", required = false) Role role) {
+    public ResponseEntity<?> getAllAccounts(@RequestParam(value = "search", required = false) String search,
+                                            Pageable pageable,
+                                            @RequestParam(value = "role", required = false) Role role) {
 
 
         Page<Account> accounts = service.getAllAccounts(search, pageable, role);
@@ -44,7 +46,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createAccount(@RequestBody AccountRequestFormForCreate form) {
+    public ResponseEntity<?> createAccount(@RequestBody @Valid AccountRequestFormForCreate form) {
         service.createAccount(form);
         return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);
     }

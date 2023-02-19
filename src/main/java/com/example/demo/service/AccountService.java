@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -174,7 +175,9 @@ public class AccountService implements IAccountService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = repository.findByUsername(username);
         if(account != null){
-            return new User(account.getUsername(), account.getPassword(), Collections.emptyList());
+            return new User(account.getUsername(),
+                            account.getPassword(),
+                    AuthorityUtils.createAuthorityList(account.getRole().toString()));
         } else {
             try {
                 throw new AccountNotFoundException("Account username not exits");
