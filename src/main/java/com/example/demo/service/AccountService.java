@@ -10,7 +10,7 @@ import com.example.demo.repository.IAccountRepository;
 import com.example.demo.specification.AccountSpecification;
 import com.example.demo.specification.AccountSpecificationBuilder;
 import com.example.demo.specification.SearchCriteria;
-import org.modelmapper.ModelMapper;
+// import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,8 +36,8 @@ import java.util.Optional;
 @Transactional
 public class AccountService implements IAccountService, UserDetailsService {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  //  @Autowired
+   // private ModelMapper modelMapper;
     @Autowired
     private IAccountRepository repository;
 

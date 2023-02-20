@@ -52,8 +52,9 @@ public class AccountController {
     }
 
     // update by id
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateAccount(@PathVariable(name = "id") int id, @RequestBody @Valid AccountRequestFormForUpdate form) {
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<?> updateAccount(@PathVariable(name = "id") int id,
+                                           @RequestBody @Valid AccountRequestFormForUpdate form) {
         service.updateAccount(id, form);
         return new ResponseEntity<>("Update successfully!", HttpStatus.OK);
     }

@@ -21,7 +21,7 @@ public class AccountRequestFormForCreate {
     @NotBlank(message = "lastname must not be null")
     private String lastName;
 
-    @Pattern(regexp = "USER|MANAGER|ADMIN", message = "the role must be USER, MANAGER or ADMIN")
+    // @Pattern(regexp = "USER|MANAGER|ADMIN", message = "the role must be USER, MANAGER or ADMIN")
     private Role role;
 
     private int departmentId;
