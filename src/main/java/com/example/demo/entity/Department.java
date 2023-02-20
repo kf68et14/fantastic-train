@@ -33,12 +33,12 @@ public class Department implements Serializable {
 
     @Column(name = "TotalMember")
     private int totalMember;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    @Column(name = "CreateDate")
-    private Date createdDate;
+//
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @CreationTimestamp
+//    @Column(name = "CreateDate")
+//    private Date createdDate;
 
     @Column(name = "Type", nullable = false)
     @Convert(converter = DepartmentTypeConvert.class)

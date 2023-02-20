@@ -7,13 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfiguration extends WebMvcConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     AccountService accountService;
 
@@ -28,8 +29,8 @@ public class WebSecurityConfiguration extends WebMvcConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .antMatchers("api/v1/accounts/**").permitAll()
-                .antMatchers("api/v1.departments/**").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/api/v1/accounts/**").permitAll()
+                .antMatchers("/api/v1.departments/**").hasAnyAuthority("ADMIN","MANAGER")
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and()

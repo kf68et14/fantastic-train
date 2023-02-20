@@ -40,7 +40,7 @@ public class DepartmentService implements IDepartmentService {
         if (department.isPresent()){
             result.setName(department.get().getName());
             result.setType(department.get().getType());
-            result.setCreatedDate(department.get().getCreatedDate());
+//            result.setCreatedDate(department.get().getCreatedDate());
 
             List<Account> accountList = department.get().getAccounts();
             List<DepartmentResponseDTO.AccountDTO> dtoList = new ArrayList<>();
