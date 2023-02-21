@@ -21,6 +21,8 @@ public class AccountResponseDTO {
 
     private String departmentName;
 
+    private int departmentId;
+
 //    @Formula(" concat(LastName, ' ', FirstName)")
 //    private String fullName;
 
