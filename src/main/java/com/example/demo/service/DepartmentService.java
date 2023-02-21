@@ -60,8 +60,8 @@ public class DepartmentService implements IDepartmentService {
     @Override
     public void createDepartment(DepartmentRequestFormForCreate form) {
         Department department = new Department();
-        department.setName(form.toEntity().getName());
-        department.setType(form.toEntity().getType());
+        department.setName(form.getName());
+        department.setType(form.getType());
         repository.save(department);
     }
 

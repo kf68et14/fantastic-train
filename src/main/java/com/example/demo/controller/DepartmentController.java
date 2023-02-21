@@ -59,7 +59,7 @@ public class DepartmentController {
         return new ResponseEntity<String>("add successfully", HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/update/{id}")
     // update department
     public ResponseEntity<?> updateDepartment(@PathVariable int id, @RequestBody @Valid DepartmentRequestFormForUpdate form) {
         service.updateDepartment(id, form);

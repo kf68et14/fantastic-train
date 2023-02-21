@@ -18,8 +18,8 @@ public class DepartmentResponseDTO {
 
     private Department.Type type;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date createdDate;
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+//    private Date createdDate;
 
     private List<AccountDTO> accounts;
 

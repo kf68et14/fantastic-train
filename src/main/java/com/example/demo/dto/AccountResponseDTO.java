@@ -15,8 +15,8 @@ public class AccountResponseDTO {
 
     private String departmentName;
 
-    @Formula(" concat(LastName, ' ', FirstName)")
-    private String fullName;
+//    @Formula(" concat(LastName, ' ', FirstName)")
+//    private String fullName;
 
     private Role role;
 }
