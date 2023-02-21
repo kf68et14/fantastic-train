@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Formula;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @NoArgsConstructor
 public class AccountResponseDTO {
@@ -12,6 +14,10 @@ public class AccountResponseDTO {
     private int id;
 
     private String username;
+
+    private String firstName;
+
+    private String lastName;
 
     private String departmentName;
 
