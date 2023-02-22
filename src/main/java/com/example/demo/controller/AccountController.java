@@ -60,13 +60,13 @@ public class AccountController {
     }
 
     // update partial information by id
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/update/v2/{id}")
     public ResponseEntity<?> updateAccountPartially(@PathVariable(name = "id") int id, @RequestBody Map<String, Object> fields) throws AccountNotFoundException {
         service.updateAccountPartially(id, fields);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/del/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteAccount(@PathVariable int id) throws AccountNotFoundException {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
