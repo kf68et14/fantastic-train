@@ -48,35 +48,35 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<?> createAccount(@RequestBody @Valid AccountRequestFormForCreate form) {
         service.createAccount(form);
-        return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // update by id
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateAccount(@PathVariable(name = "id") int id,
                                            @RequestBody @Valid AccountRequestFormForUpdate form) {
         service.updateAccount(id, form);
-        return new ResponseEntity<>("Update successfully!", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // update partial information by id
-    @PatchMapping(value = "/update/{id}")
+    @PatchMapping(value = "/{id}")
     public ResponseEntity<?> updateAccountPartially(@PathVariable(name = "id") int id, @RequestBody Map<String, Object> fields) throws AccountNotFoundException {
         service.updateAccountPartially(id, fields);
-        return new ResponseEntity<String>("update successfully", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/del/{id}")
     public ResponseEntity<?> deleteAccount(@PathVariable int id) throws AccountNotFoundException {
         service.deleteById(id);
-        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // delete nhieu account
     @DeleteMapping
     public ResponseEntity<?> deleteAccounts(@RequestBody List<Integer> ids) throws AccountNotFoundException {
         service.deleteAccounts(ids);
-        return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
 }
