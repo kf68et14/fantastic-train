@@ -43,34 +43,34 @@ public class DepartmentController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getDepartmentById(@PathVariable(name = "id") int id) throws Exception {
         DepartmentResponseDTO department = service.getDepartmentByID(id);
-        return new ResponseEntity<DepartmentResponseDTO>(department, HttpStatus.OK);
+        return new ResponseEntity<>(department, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> createDepartment(
             @RequestBody @Valid DepartmentRequestFormForCreate form) {
         service.createDepartment(form);
-        return new ResponseEntity<String>("Create successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // add account to Department
     public ResponseEntity<?> addAccountToDepartment(Account account, Department department) {
         service.addAccountToDepartment(account, department);
-        return new ResponseEntity<String>("add successfully", HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/{id}")
     // update department
     public ResponseEntity<?> updateDepartment(@PathVariable int id, @RequestBody @Valid DepartmentRequestFormForUpdate form) {
         service.updateDepartment(id, form);
-        return new ResponseEntity<String>("update successfully", HttpStatus.ACCEPTED);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
     // delete
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteDepartment(@PathVariable int id) {
         service.deleteDepartment(id);
-        return new ResponseEntity<String>("delete successfully", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

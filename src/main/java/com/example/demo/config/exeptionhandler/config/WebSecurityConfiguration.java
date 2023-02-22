@@ -29,9 +29,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .antMatchers("/api/v1/accounts/**").permitAll()
-                .antMatchers("/api/v1.departments/**").hasAnyAuthority("ADMIN","MANAGER")
-                .anyRequest().authenticated()
-                .and().httpBasic()
                 .and()
                 .cors().and()
                 .csrf().disable();

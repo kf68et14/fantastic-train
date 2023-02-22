@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DepartmentResponseDTO {
+    private int id;
 
     private String name;
 
