@@ -54,10 +54,11 @@ public class DepartmentController {
     }
 
     // add account to Department
-    public ResponseEntity<?> addAccountToDepartment(Account account, Department department) {
-        service.addAccountToDepartment(account, department);
-        return new ResponseEntity<>( HttpStatus.OK);
-    }
+//    @PutMapping(value = {"addAccount/{id}"})
+//    public ResponseEntity<?> addAccountToDepartment(List<Account> accounts, Department department) {
+//        service.addAccountToDepartment(accounts, department);
+//        return new ResponseEntity<>( HttpStatus.OK);
+//    }
 
     @PutMapping(value = "/{id}")
     // update department

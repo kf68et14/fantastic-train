@@ -65,10 +65,13 @@ public class DepartmentService implements IDepartmentService {
         repository.save(department);
     }
 
-    @Override
-    public void addAccountToDepartment(Account account, Department department) {
-
-    }
+//    @Override
+//    public void addAccountToDepartment(List<Account> accounts, Department department) {
+//        List<Account> accountList = department.getAccounts();
+//        for (Account account: accounts) {
+//            accountList.add(account);
+//        }
+//    }
 
     @Override
     public void updateDepartment(int id, DepartmentRequestFormForUpdate form) {

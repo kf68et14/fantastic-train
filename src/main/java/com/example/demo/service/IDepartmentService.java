@@ -10,6 +10,8 @@ import com.example.demo.form.DepartmentRequestFormForUpdate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 
 public interface IDepartmentService {
 
@@ -19,7 +21,7 @@ public interface IDepartmentService {
 
     void createDepartment(DepartmentRequestFormForCreate form);
 
-    void addAccountToDepartment(Account account, Department department);
+   // void addAccountToDepartment(List<Account> account, Department department);
 
     void updateDepartment(int id, DepartmentRequestFormForUpdate form);
 
