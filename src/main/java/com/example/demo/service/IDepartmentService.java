@@ -21,8 +21,6 @@ public interface IDepartmentService {
 
     void createDepartment(DepartmentRequestFormForCreate form);
 
-   // void addAccountToDepartment(List<Account> account, Department department);
-
     void updateDepartment(int id, DepartmentRequestFormForUpdate form);
 
     void deleteDepartment(int id);

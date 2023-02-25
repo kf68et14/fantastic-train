@@ -19,8 +19,6 @@ public class AccountRequestFormForUpdate {
     @NotBlank(message = "lastname must not be null")
     private String lastName;
 
-   //  @Pattern(regexp = "USER|MANAGER|ADMIN", message = "the role must be USER, MANAGER or ADMIN")
-//    @NotBlank(message = "role must not be null")
     private Role role;
 
     private int departmentId;
